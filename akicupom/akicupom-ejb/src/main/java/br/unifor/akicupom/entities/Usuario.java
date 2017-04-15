@@ -1,4 +1,4 @@
-package br.unifor.akicupom.entitys;
+package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
 
@@ -9,23 +9,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="usuario_tb")
-public class Usuario implements Serializable{
+import org.hibernate.validator.constraints.Email;
 
-	private static final long serialVersionUID = 2274616439641970349L;
+@Entity
+@Table(name = "tb_usuario")
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="usuario_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "usuario_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable = false)
-	private String name;
-		
+	private String nome;
+
+	@Email
 	@Column(nullable = false)
 	private String email;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -34,12 +37,12 @@ public class Usuario implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -49,6 +52,7 @@ public class Usuario implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -74,10 +78,10 @@ public class Usuario implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-		
+
+	@Override
+	public String toString() {
+		return "Contato [id=" + id + ", nome=" + nome + ", e-mail=" + email + "]";
+	}
+
 }
