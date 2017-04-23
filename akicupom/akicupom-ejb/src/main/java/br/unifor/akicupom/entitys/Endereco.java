@@ -1,5 +1,5 @@
 package br.unifor.akicupom.entitys;
 
-public class Endereço {
+public class Endereco {
 
 }
