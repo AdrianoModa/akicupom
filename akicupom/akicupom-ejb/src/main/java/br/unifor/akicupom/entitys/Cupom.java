@@ -11,7 +11,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="cupom_tb")
@@ -24,27 +28,42 @@ public class Cupom implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name="nome")
+	private String nome;
+	
 	@Column(nullable = false)
 	private String descricao;
 	
 	@Column(nullable = false)
-	@Enumerated(EnumType.ORDINAL)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataValidade;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private Categoria cat;
 	
 	@Column(nullable = false)
+	private List<Endereco> lojaParticipante;
+	
+	@ManyToOne
+	@JoinColumn(name="for_id")
 	private Fornecedor fornecedor;
 	
-	@Column(nullable = false)
-	private Calendar datePost;
-	
-	@Column(nullable = false)
-	private Calendar dataVenda;
-	
-	@Column(nullable = false)
-	private Usuario usuario;
-	
-	@Column(nullable = false)
-	private List<Endereco> lojaParticipante;
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Calendar getDataValidade() {
+		return dataValidade;
+	}
+
+	public void setDataValidade(Calendar dataValidade) {
+		this.dataValidade = dataValidade;
+	}
 
 	public Long getId() {
 		return id;
@@ -76,30 +95,6 @@ public class Cupom implements Serializable{
 
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
-	}
-
-	public Calendar getDatePost() {
-		return datePost;
-	}
-
-	public void setDatePost(Calendar datePost) {
-		this.datePost = datePost;
-	}
-
-	public Calendar getDataVenda() {
-		return dataVenda;
-	}
-
-	public void setDataVenda(Calendar dataVenda) {
-		this.dataVenda = dataVenda;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public List<Endereco> getLojaParticipante() {

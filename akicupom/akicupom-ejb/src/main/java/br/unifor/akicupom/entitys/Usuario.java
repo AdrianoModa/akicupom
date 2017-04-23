@@ -1,12 +1,15 @@
 package br.unifor.akicupom.entitys;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +28,13 @@ public class Usuario implements Serializable{
 		
 	@Column(nullable = false)
 	private String email;
-
+	
+	
+	@OneToMany
+	@JoinColumn(name="cupomList_fk", referencedColumnName="usuario_id")
+	private List<Cupom> cupomList;
+	
+	
 	public Long getId() {
 		return id;
 	}
