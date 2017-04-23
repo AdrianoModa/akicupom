@@ -44,7 +44,7 @@ public class Cupom implements Serializable{
 	private Usuario usuario;
 	
 	@Column(nullable = false)
-	private List <Endereço> lojaParticipante;
+	private List<Endereco> lojaParticipante;
 
 	public Long getId() {
 		return id;
@@ -102,11 +102,11 @@ public class Cupom implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public List<Endereço> getLojaParticipante() {
+	public List<Endereco> getLojaParticipante() {
 		return lojaParticipante;
 	}
 
-	public void setLojaParticipante(List<Endereço> lojaParticipante) {
+	public void setLojaParticipante(List<Endereco> lojaParticipante) {
 		this.lojaParticipante = lojaParticipante;
 	}
 
