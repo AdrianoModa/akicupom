@@ -31,6 +31,14 @@ public class Fornecedor implements Serializable{
 	@OneToMany
 	private List<Cupom> cupomFor;
 
+	public List<Cupom> getCupomFor() {
+		return cupomFor;
+	}
+
+	public void setCupomFor(List<Cupom> cupomFor) {
+		this.cupomFor = cupomFor;
+	}
+
 	public String getCnpj() {
 		return cnpj;
 	}

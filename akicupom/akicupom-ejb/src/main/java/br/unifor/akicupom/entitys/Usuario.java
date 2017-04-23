@@ -31,10 +31,17 @@ public class Usuario implements Serializable{
 	
 	
 	@OneToMany
-	@JoinColumn(name="cupomList_fk", referencedColumnName="usuario_id")
-	private List<Cupom> cupomList;
+	private List<Compra> compraList;
 	
 	
+	public List<Compra> getCompraList() {
+		return compraList;
+	}
+
+	public void setCompraList(List<Compra> compraList) {
+		this.compraList = compraList;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -31,6 +31,14 @@ public class Cupom implements Serializable{
 	@Column(name="nome")
 	private String nome;
 	
+	public Compra getCompra() {
+		return compra;
+	}
+
+	public void setCompra(Compra compra) {
+		this.compra = compra;
+	}
+
 	@Column(nullable = false)
 	private String descricao;
 	
@@ -46,8 +54,12 @@ public class Cupom implements Serializable{
 	private List<Endereco> lojaParticipante;
 	
 	@ManyToOne
-	@JoinColumn(name="for_id")
+	@JoinColumn(name="fornecedor_id")
 	private Fornecedor fornecedor;
+	
+	@ManyToOne
+	@JoinColumn(name="compra_id")
+	private Compra compra;
 	
 	public String getNome() {
 		return nome;
