@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -28,6 +28,7 @@ public class UsuarioResource {
 	private UsuarioBO usuarioBO;
 	
 	@GET
+	@Path("/usuario/listausuarios")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listarUsuarios(){
 		List<Usuario> usuarios = usuarioBO.listaUsuarios();
@@ -57,17 +58,27 @@ public class UsuarioResource {
 	}
 	
 	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/usuario/{id}/{nome}/{email}")
-	public Response atualizarUsuario(@PathParam("id") Long id, @PathParam("nome") String nome, @PathParam("email") String email){
-		Usuario usuario = usuarioBO.buscarPorId(id);
-		usuario.setNome(nome);
-		usuario.setEmail(email);
-		usuarioBO.atualizarUsuario(usuario);
-		
+	@Path("/usuario/{id}")
+	public Response atualizarUsuario(@PathParam("id") Long id, Usuario usuario){
+		Usuario usuarioExistente = usuarioBO.buscarPorId(id);
+		if(usuarioExistente == null){
+			throw new WebApplicationException(Status.NOT_MODIFIED);
+		}
+		usuarioExistente.setNome(usuario.getNome());
+		usuarioExistente.setEmail(usuario.getEmail());
+		usuarioBO.atualizarUsuario(usuarioExistente);		
 		return Response.ok().build();
 	}
 	
-	//public Response deleteUsuario(){}
+	@DELETE
+	@Path("/usuario/{id}")
+	public Response deletarUsuario(@PathParam("id") Long id){
+		Usuario usuario = usuarioBO.buscarPorId(id);
+		if(usuario == null){
+			throw new WebApplicationException(Status.NOT_MODIFIED);
+		}
+		usuarioBO.removerUsuario(usuario);
+		return Response.ok().build();
+	}
 
 }
