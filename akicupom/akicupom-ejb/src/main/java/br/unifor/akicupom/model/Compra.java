@@ -1,4 +1,4 @@
-package br.unifor.akicupom.entities;
+package br.unifor.akicupom.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,10 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 
-@Entity(name = "tb_compra")
+@Entity
+@Table(name = "tb_compra")
 public class Compra implements Serializable {
 
 	

@@ -1,4 +1,4 @@
-package br.unifor.akicupom.entities;
+package br.unifor.akicupom.model;
 
 import java.io.Serializable;
 import java.util.List;

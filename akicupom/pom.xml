@@ -125,8 +125,8 @@
 					<configuration>
 						<hostname>localhost</hostname>
 						<port>9990</port>
-						<username>root</username>
-						<password>root</password>
+						<username>admin</username>
+						<password>admin</password>
 						<skip>true</skip>
 					</configuration>
 				</plugin>

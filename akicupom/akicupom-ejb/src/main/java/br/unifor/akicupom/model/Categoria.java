@@ -1,4 +1,4 @@
-package br.unifor.akicupom.entities;
+package br.unifor.akicupom.model;
 
 import java.io.Serializable;
 
@@ -9,25 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Email;
-
 @Entity
-@Table(name = "tb_usuario")
-public class Usuario implements Serializable {
+@Table(name = "tb_categoria")
+public class Categoria implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2600031514525921959L;
 
 	@Id
-	@Column(name = "usuario_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "categoria_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-
-	@Column(nullable = false)
-	private String nome;
-
-	@Email
-	@Column(nullable = false)
-	private String email;
+	
+	@Column(nullable=false)
+	private String descricao;
 	
 	public Long getId() {
 		return id;
@@ -37,27 +31,19 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -70,7 +56,12 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Categoria other = (Categoria) obj;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,10 +69,16 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
+	
 
 	@Override
 	public String toString() {
-		return "Contato [id=" + id + ", nome=" + nome + ", e-mail=" + email + "]";
+		return "Categoria [id=" + id + ", descricao=" + descricao + "]";
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 }
